@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}{{ genre.genre_name }} - 电影列表{% endblock %}
+
+{% block content %}
+<a href="{% url 'genres:genre_list' %}" class="back-button">
+    返回类型列表
+</a>
+
+<h2 class="section-title">{{ genre.genre_name }}</h2>
+<p class="movie-count">
+    📽️ 共有 {{ movies.count }} 部电影
+</p>
+
+<div class="movie-grid">
+    {% for movie in movies %}
+    <div class="movie-card">
+        <img src="https://picsum.photos/300/180?random={{ movie.id }}" 
+             alt="{{ movie.name }}" 
+             class="movie-thumbnail">
+        <div class="movie-content">
+            <h3 class="movie-title">{{ movie.name }}</h3>
+            <div class="movie-meta">
+                <span>{{ movie.release_year }}</span>
+                <span>{{ movie.length }} 分钟</span>
+            </div>
+            <p class="text-gray-500 mb-3">
+                {{ movie.plot_summary|default:"暂无剧情简介" }}
+            </p>
+            <a href="{% url 'movies:movie_detail' movie.id %}" class="btn-movie">
+                查看电影详情
+            </a>
+        </div>
+    </div>
+    {% empty %}
+    <div class="genre-card text-center">
+        <p class="movie-count text-gray-400">
+            📽️ 该类型下暂无电影
+        </p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

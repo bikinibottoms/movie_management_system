@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}电影类型列表{% endblock %}
+
+{% block content %}
+<div>
+    <h2 class="section-title">所有电影类型</h2>
+    <div class="genre-grid">
+        {% for genre in genres %}
+        <div class="genre-card">
+            <h3 class="genre-name">{{ genre.genre_name }}</h3>
+            <p class="movie-count">
+                📽️ 共有 {{ genre.movies.count }} 部电影
+            </p>
+            <a href="{% url 'genres:genre_detail' genre.genre_name %}" class="btn-view">
+                查看详情 →
+            </a>
+        </div>
+        {% empty %}
+        <div class="genre-card text-center">
+            <p class="movie-count text-gray-400">
+                📁 暂无电影类型
+            </p>
+        </div>
+        {% endfor %}
+        
+    </div>
+</div>
+{% endblock %}
