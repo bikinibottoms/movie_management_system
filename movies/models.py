@@ -72,4 +72,4 @@ class MovieRole(models.Model):
     actor = models.ForeignKey(Actor, on_delete=models.CASCADE)
     
     class Meta:
-        unique_together = ('role_name', 'movie')
+         unique_together = ('movie', 'actor', 'role_name') 

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}出品公司列表{% endblock %}
+
+
+{% block content %}
+<h2 class="section-title">出品公司列表</h2>
+
+<!-- 搜索框和添加按钮 -->
+<div class="mt-6">
+    
+    <form method="get" action="{% url 'production_companies:company_search' %}" class="mt-4">
+        <input type="text" name="query" placeholder="搜索公司..." class="form-input">
+        <button type="submit" class="btn-movie ml-2">搜索</button>
+    </form>
+    <a href="{% url 'production_companies:company_add' %}" class="btn-view">添加公司</a>
+</div>
+
+
+
+
+<div class="movie-grid">
+    {% for company in companies %}
+    <div class="movie-card">
+        <div class="movie-content">
+            <h3 class="movie-title">{{ company.name }}</h3>
+            <div class="movie-meta">
+                <span>城市: {{ company.city|default:"未知" }}</span>
+            </div>
+            <div class="flex space-x-2">
+                <a href="{% url 'production_companies:company_detail' company.pk %}" class="btn-movie">查看详情</a>
+                <a href="{% url 'production_companies:company_edit' company.pk %}" class="btn-movie">编辑</a>
+                <a href="{% url 'production_companies:company_delete' company.pk %}" class="btn-movie">删除</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="text-center py-8">
+        <p class="text-gray-500">暂无出品公司</p>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

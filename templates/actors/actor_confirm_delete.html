@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}确认删除{% endblock %}
+
+{% block content %}
+<a href="{% url 'actors:actor_detail' actor.name %}" class="back-button">返回演员详情</a>
+<h2 class="section-title">确认删除</h2>
+
+<div class="bg-white rounded-lg shadow-md p-6">
+    <p class="text-lg mb-4">确定要删除演员 "{{ actor.name }}" 吗？</p>
+    <p class="text-red-500 mb-6">此操作不可撤销。</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn-movie bg-red-500 hover:bg-red-600">确认删除</button>
+        <a href="{% url 'actors:actor_detail' actor.name %}" class="btn-movie ml-2">取消</a>
+    </form>
+</div>
+{% endblock %}

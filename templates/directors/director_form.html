@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{% if form.instance.pk %}编辑导演{% else %}添加导演{% endif %}{% endblock %}
+
+{% block content %}
+<a href="{% url 'directors:director_list' %}" class="back-button">返回导演列表</a>
+<h2 class="section-title">{% if form.instance.pk %}编辑导演{% else %}添加导演{% endif %}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="{{ form.name.id_for_label }}" class="form-label">姓名</label>
+        {{ form.name }}
+    </div>
+    <div class="mb-3">
+        <label for="{{ form.birth_date.id_for_label }}" class="form-label">生日</label>
+        {{ form.birth_date }}
+    </div>
+
+    <!-- 搜索框 -->
+    <div class="mb-3">
+        <label class="form-label">执导的电影</label>
+        <input type="text" id="movie-search" class="form-input mb-2" placeholder="搜索电影...">
+        
+        <!-- 电影列表容器 -->
+        <div class="max-h-60 overflow-y-auto border rounded p-2" id="movie-list">
+            {% for movie in form.movies.field.queryset %}
+            <div class="flex items-center mb-1">
+                <input type="checkbox" name="movies" value="{{ movie.pk }}" 
+                       id="id_movies_{{ forloop.counter0 }}"
+                       {% if movie in form.initial.movies %}checked{% endif %}>
+                <label for="id_movies_{{ forloop.counter0 }}" class="ml-2 movie-name">
+                    {{ movie.name }}
+                </label>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <button type="submit" class="btn-movie">保存</button>
+</form>
+
+<!-- 搜索功能脚本 -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('movie-search');
+        const movieList = document.getElementById('movie-list');
+        const movieNames = document.querySelectorAll('.movie-name');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            movieNames.forEach(name => {
+                const parentDiv = name.parentElement;
+                if (name.textContent.toLowerCase().includes(searchTerm)) {
+                    parentDiv.style.display = 'flex';
+                } else {
+                    parentDiv.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

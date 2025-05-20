@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}{{ actor.name }}{% endblock %}
+
+{% block content %}
+<a href="{% url 'actors:actor_list' %}" class="back-button">返回演员列表</a>
+<h2 class="section-title">{{ actor.name }}</h2>
+
+<div class="bg-white rounded-lg shadow-md p-6 mb-6">
+    <h3 class="text-lg font-semibold mb-3">演员信息</h3>
+    <p class="mb-2"><span class="font-medium">姓名:</span> {{ actor.name }}</p>
+    <p class="mb-2"><span class="font-medium">出生日期:</span> {{ actor.birth_date|default:"未知" }}</p>
+</div>
+
+<div class="bg-white rounded-lg shadow-md p-6">
+    <h3 class="text-lg font-semibold mb-3">参演电影及角色</h3>
+    {% if movie_roles %}
+    <ul class="list-disc pl-6">
+        {% for role in movie_roles %}
+        <li>
+            <strong>电影:</strong> {{ role.movie.name }} 
+            <br>
+            <strong>角色:</strong> {{ role.role_name }}
+            <a href="{% url 'actors:delete_role' role.id %}" class="text-red-500 ml-2">删除</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-gray-500">暂无参演电影记录</p>
+    {% endif %}
+</div>
+
+<a href="{% url 'actors:add_movie_to_actor' actor_name=actor.name %}">添加参演电影</a>
+
+{% endblock %}

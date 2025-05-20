@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}删除电影{% endblock %}
+
+{% block content %}
+<a href="{% url 'movies:movie_list' %}" class="back-button">
+    返回电影列表
+</a>
+
+<h2 class="section-title">确认删除电影: {{ object.name }}?</h2>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn-movie">确认删除</button>
+    <a href="{% url 'movies:movie_list' %}" class="btn-movie">取消</a>
+</form>
+{% endblock %}

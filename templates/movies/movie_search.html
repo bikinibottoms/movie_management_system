@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}搜索电影信息{% endblock %}
+
+{% block content %}
+<a href="{% url 'movies:movie_list' %}" class="back-button">
+    返回电影列表
+</a>
+
+<h2 class="section-title">搜索电影信息</h2>
+<form method="post">
+    {% csrf_token %}
+    <label for="movie_name">电影名称:</label>
+    <input type="text" id="movie_name" name="movie_name" required>
+    <button type="submit" class="btn-movie">搜索</button>
+</form>
+{% endblock %}

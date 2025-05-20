@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}导演列表{% endblock %}
+
+{% block content %}
+<h2 class="section-title">导演列表</h2>
+<!-- 搜索表单 -->
+<form method="get" class="mb-4">
+    <input type="text" name="search_query" placeholder="搜索导演" class="form-input mr-2">
+    <button type="submit" class="btn-movie">搜索</button>
+</form>
+<a href="{% url 'directors:director_add' %}" class="btn-view mt-4">添加导演</a>
+<div class="movie-grid">
+    {% for director in directors %}
+    <div class="movie-card">
+        <div class="movie-content">
+            <h3 class="movie-title">{{ director.name }}</h3>
+            <p class="text-gray-500 mb-3">
+                出生日期: {{ director.birth_date|default:"未设置" }}
+            </p>
+            <a href="{% url 'directors:director_detail' director.name %}" class="btn-movie">查看详情</a>
+            <a href="{% url 'directors:director_edit' director.name %}" class="btn-movie">编辑</a>
+            <a href="{% url 'directors:director_delete' director.name %}" class="btn-movie">删除</a>
+        </div>
+    </div>
+    {% empty %}
+    <div class="genre-card text-center">
+        <p class="movie-count text-gray-400">暂无导演</p>
+    </div>
+    {% endfor %}
+</div>
+<!-- 移动“添加导演”按钮到列表下方 -->
+
+{% endblock %}

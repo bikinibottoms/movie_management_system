@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'production_companies',
     'genres',
     'core',
+    'django_select2',
 ]
 
 MIDDLEWARE = [

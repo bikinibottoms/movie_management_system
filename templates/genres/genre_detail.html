@@ -14,14 +14,11 @@
 <div class="movie-grid">
     {% for movie in movies %}
     <div class="movie-card">
-        <img src="https://picsum.photos/300/180?random={{ movie.id }}" 
-             alt="{{ movie.name }}" 
-             class="movie-thumbnail">
         <div class="movie-content">
             <h3 class="movie-title">{{ movie.name }}</h3>
             <div class="movie-meta">
-                <span>{{ movie.release_year }}</span>
-                <span>{{ movie.length }} 分钟</span>
+                <span class="me-2"> {{ movie.release_year }}</span>
+                <span> {{ movie.length }} 分钟</span>
             </div>
             <p class="text-gray-500 mb-3">
                 {{ movie.plot_summary|default:"暂无剧情简介" }}

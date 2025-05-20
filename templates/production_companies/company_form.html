@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{% if form.instance.pk %}编辑出品公司{% else %}添加出品公司{% endif %}{% endblock %}
+
+{% block content %}
+<a href="{% url 'production_companies:company_list' %}" class="back-button">返回公司列表</a>
+<h2 class="section-title">{% if form.instance.pk %}编辑{% else %}添加{% endif %}出品公司</h2>
+
+<form method="post" class="bg-white rounded-lg shadow-md p-6">
+    {% csrf_token %}
+    <div class="mb-4">
+        <label for="{{ form.name.id_for_label }}" class="block text-gray-700 font-medium mb-2">公司名称</label>
+        {{ form.name }}
+        {% if form.name.errors %}
+        <p class="text-red-500 text-sm mt-1">{{ form.name.errors.0 }}</p>
+        {% endif %}
+    </div>
+    
+    <div class="mb-4">
+        <label for="{{ form.city.id_for_label }}" class="block text-gray-700 font-medium mb-2">所在城市</label>
+        {{ form.city }}
+        {% if form.city.errors %}
+        <p class="text-red-500 text-sm mt-1">{{ form.city.errors.0 }}</p>
+        {% endif %}
+    </div>
+    
+    <button type="submit" class="btn-movie">保存</button>
+</form>
+{% endblock %}

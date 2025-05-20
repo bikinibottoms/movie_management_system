@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{% if form.instance.pk %}编辑演员{% else %}添加演员{% endif %}{% endblock %}
+
+{% block content %}
+<a href="{% url 'actors:actor_list' %}" class="back-button">返回演员列表</a>
+<h2 class="section-title">{% if form.instance.pk %}编辑{% else %}添加{% endif %}演员</h2>
+
+<form method="post" class="bg-white rounded-lg shadow-md p-6">
+    {% csrf_token %}
+    <div class="mb-4">
+        <label for="{{ form.name.id_for_label }}" class="block text-gray-700 font-medium mb-2">演员姓名</label>
+        {{ form.name }}
+        {% if form.name.errors %}
+        <p class="text-red-500 text-sm mt-1">{{ form.name.errors.0 }}</p>
+        {% endif %}
+    </div>
+    
+    <div class="mb-4">
+        <label for="{{ form.birth_date.id_for_label }}" class="block text-gray-700 font-medium mb-2">出生日期</label>
+        {{ form.birth_date }} <!-- 自动渲染为日期选择器 -->
+        {% if form.birth_date.errors %}
+        <p class="text-red-500 text-sm mt-1">{{ form.birth_date.errors.0 }}</p>
+        {% endif %}
+    </div>
+    
+    <button type="submit" class="btn-movie">保存</button>
+</form>
+{% endblock %}

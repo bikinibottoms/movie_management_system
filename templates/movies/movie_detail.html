@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}{{ movie.name }} - 电影详情{% endblock %}
+
+{% block content %}
+<a href="{% url 'movies:movie_list' %}" class="back-button">
+    返回电影列表
+</a>
+
+{% if error %}
+    <p class="text-gray-500 mb-3">{{ error }}</p>
+{% else %}
+    <h2 class="section-title">{{ movie.name }} - 电影详情</h2>
+    <h3>基本信息</h3>
+    <p>📅 上映年份: {{ movie.release_year }}</p>
+    <p>⏳ 时长: {{ movie.length }} 分钟</p>
+    <p>📝 剧情简介: {{ movie.plot_summary|default:"暂无剧情简介" }}</p>
+    <p>🎬 出品公司: {{ movie.production_company.name }}</p>
+
+    <h3>导演</h3>
+    <ul>
+        {% for director in directors %}
+        <li>{{ director.name }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>演员</h3>
+    <ul>
+        {% for actor_info in actors %}
+        <li>{{ actor_info.actor.name }} - 饰演 {{ actor_info.role_name }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>旁白</h3>
+    <ul>
+        {% for narrator in narrators %}
+        <li>{{ narrator.actor.name }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>类型</h3>
+    <ul>
+        {% for genre in genres %}
+        <li>{{ genre.genre_name }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

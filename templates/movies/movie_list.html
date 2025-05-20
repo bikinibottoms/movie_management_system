@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}电影列表{% endblock %}
+
+{% block content %}
+<div>
+    <h2 class="section-title">所有电影</h2>
+    <!-- 添加按钮容器，使用 flex 布局并靠右对齐 -->
+    <div class="flex justify-end mb-4">
+        <a href="{% url 'movies:movie_add' %}" class="btn-view mr-2">添加电影</a>
+        <a href="{% url 'movies:movie_search' %}" class="btn-view">搜索电影</a>
+    </div>
+    <div class="movie-grid">
+        {% for movie in movies %}
+        <div class="movie-card">
+            <div class="movie-content">
+                <h3 class="movie-title">{{ movie.name }}</h3>
+                <div class="movie-meta">
+                    <span class="me-2"> {{ movie.release_year }} 年</span>
+                    <span> {{ movie.length }} 分钟</span>
+                </div>
+                <p class="text-gray-500 mb-3">
+                    {{ movie.plot_summary|default:"暂无剧情简介" }}
+                </p>
+                <div class="btn-group" role="group">
+                    <a href="{% url 'movies:movie_detail' movie.id %}" class="btn-movie me-2">
+                        查看电影详情
+                    </a>
+                    <a href="{% url 'movies:movie_edit' movie.id %}" class="btn-movie me-2">
+                        编辑电影
+                    </a>
+                    <a href="{% url 'movies:movie_delete' movie.id %}" class="btn-movie">
+                        删除电影
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="genre-card text-center">
+            <p class="movie-count text-gray-400">
+                📁 暂无电影
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

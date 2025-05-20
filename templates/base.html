@@ -29,6 +29,32 @@
             margin-bottom: 30px;
         }
 
+        /* 新增导航栏样式 */
+       .nav-bar {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+       .nav-bar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+       .nav-bar li {
+            display: inline-block;
+            margin: 0 15px;
+        }
+       .nav-bar a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+       .nav-bar a:hover {
+            color: #007bff;
+        }
+
         .section-title {
             font-size: 24px;
             color: #1a1a1a;
@@ -171,7 +197,17 @@
 </head>
 <body>
     <div class="header">
-        <h1 class="section-title">电影类型管理系统</h1>
+        <h1 class="section-title">电影管理系统</h1>
+    </div>
+    <!-- 新增导航栏 -->
+    <div class="nav-bar">
+        <ul>
+            <li><a href="{% url 'movies:movie_list' %}">电影</a></li>
+            <li><a href="{% url 'directors:director_list' %}">导演</a></li>
+            <li><a href="{% url 'production_companies:company_list' %}">出品公司</a></li>
+            <li><a href="{% url 'actors:actor_list' %}">演员</a></li>
+            <li><a href="{% url 'genres:genre_list' %}">类型</a></li>
+        </ul>
     </div>
     <div class="container">
         {% block content %}{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}{% if form.instance.pk %}编辑电影{% else %}添加电影{% endif %}{% endblock %}
+
+{% block content %}
+    <a href="{% url 'movies:movie_list' %}" class="back-button">
+         返回电影列表
+    </a>
+    <h2 class="section-title">{% if form.instance.pk %}编辑电影{% else %}添加电影{% endif %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb - 3">
+            <label for="{{ form.name.id_for_label }}" class="form - label">{{ form.name.label }}</label>
+            {{ form.name }}
+        </div>
+        <div class="mb - 3">
+            <label for="{{ form.length.id_for_label }}" class="form - label">{{ form.length.label }}</label>
+            {{ form.length }}
+        </div>
+        <div class="mb - 3">
+            <label for="{{ form.plot_summary.id_for_label }}" class="form - label">{{ form.plot_summary.label }}</label>
+            {{ form.plot_summary }}
+        </div>
+        <div class="mb - 3">
+            <label for="{{ form.production_company.id_for_label }}" class="form - label">{{ form.production_company.label }}</label>
+            {{ form.production_company }}
+        </div>
+        <div class="mb - 3">
+            <label for="{{ form.release_year.id_for_label }}" class="form - label">{{ form.release_year.label }}</label>
+            {{ form.release_year }}
+        </div>
+        <div class="mb - 3">
+            <label for="{{ form.genres.id_for_label }}" class="form - label">{{ form.genres.label }}</label>
+            <div class="flex flex - wrap gap - 2">
+                {% for checkbox in form.genres %}
+                <div>{{ checkbox.tag }} {{ checkbox.choice_label }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <button type="submit" class="btn - movie">保存</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}确认删除{% endblock %}
+
+{% block content %}
+<a href="{% url 'production_companies:company_detail' object.pk %}" class="back-button">返回公司详情</a> <!-- 修改此处 -->
+<h2 class="section-title">确认删除</h2>
+
+<div class="bg-white rounded-lg shadow-md p-6">
+    <p class="text-lg mb-4">确定要删除出品公司 "{{ object.name }}" 吗？</p> <!-- 修改此处 -->
+    <p class="text-red-500 mb-6">此操作不可撤销，该公司关联的电影信息将被保留。</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn-movie bg-red-500 hover:bg-red-600">确认删除</button>
+        <a href="{% url 'production_companies:company_detail' object.pk %}" class="btn-movie ml-2">取消</a> <!-- 修改此处 -->
+    </form>
+</div>
+{% endblock %}

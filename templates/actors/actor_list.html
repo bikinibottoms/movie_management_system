@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}演员列表{% endblock %}
+
+{% block content %}
+
+ <h2 class="section-title">演员列表</h2>
+<form method="get" action="{% url 'actors:actor_list' %}" class="mb-4">
+    <input type="text" name="search_query" placeholder="搜索演员..." class="form-input">
+    <button type="submit" class="btn-movie ml-2">搜索</button>
+</form>
+
+<div class="flex justify-between items-center mb-4">
+   
+    <a href="{% url 'actors:actor_add' %}" class="btn-view">添加演员</a>
+</div>
+
+<div class="movie-grid">
+    {% for actor in actors %}
+    <div class="movie-card">
+        <div class="movie-content">
+            <h3 class="movie-title">{{ actor.name }}</h3>
+            <p class="text-gray-500 mb-3">
+                出生日期: {{ actor.birth_date|default:"未设置" }}
+            </p>
+            <a href="{% url 'actors:actor_detail' actor.name %}" class="btn-movie">查看详情</a>
+            <a href="{% url 'actors:actor_edit' actor.name %}" class="btn-movie">编辑</a>
+            <a href="{% url 'actors:actor_delete' actor.name %}" class="btn-movie">删除</a>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-span-full text-center py-8">
+        <p class="text-gray-500">暂无演员</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

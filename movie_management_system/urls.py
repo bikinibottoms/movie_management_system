@@ -20,4 +20,8 @@ from django.urls import path , include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('genres/', include('genres.urls')),  # 指向 genres 应用的 URL
+    path('movies/', include('movies.urls')),
+    path('directors/', include('directors.urls')),
+    path('companies/', include('production_companies.urls')),
+    path('actors/', include('actors.urls')),
 ]

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}添加电影到演员{% endblock %}
+
+{% block content %}
+<a href="{% url 'actors:actor_detail' actor.name %}" class="back-button">返回演员详情</a>
+<h2 class="section-title">添加电影及角色</h2>
+<form method="post" class="bg-white rounded-lg shadow-md p-6">
+    {% csrf_token %}
+    
+    <div class="mb-4">
+        <label for="movie" class="block text-gray-700 font-medium mb-2">选择电影</label>
+        <select name="movie" id="movie" class="form-input">
+            <option value="">-- 请选择电影 --</option>
+            {% for movie in movies %}
+            <option value="{{ movie.pk }}">{{ movie.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <div class="mb-4">
+        <label for="role_name" class="block text-gray-700 font-medium mb-2">角色名称</label>
+        <input type="text" name="role_name" id="role_name" class="form-input" required>
+    </div>
+    
+    <button type="submit" class="btn-movie">添加角色</button>
+</form>
+{% endblock %}
