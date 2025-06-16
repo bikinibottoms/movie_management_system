@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}电影管理系统 - 首页{% endblock %}
+
+{% block content %}
+<style>
+  .decor-line {
+    height: 1px;
+    background-color: #e2e8f0;
+    margin: 2rem auto;
+    max-width: 80%;
+    position: relative;
+  }
+  
+  .decor-line::before,
+  .decor-line::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    background-color: #3b82f6;
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .decor-line::before {
+    left: -20px;
+  }
+  
+  .decor-line::after {
+    right: -20px;
+  }
+  
+  .title-decoration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  
+  .title-decoration span {
+    width: 40px;
+    height: 2px;
+    background-color: #3b82f6;
+    margin: 0 1rem;
+  }
+</style>
+
+<div class="container flex flex-col items-center justify-center min-h-screen">
+  <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 w-full max-w-2xl">
+    <div class="text-center">
+      <!-- 标题装饰 -->
+      <div class="title-decoration">
+        <span></span>
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800">GROUP 19</h1>
+        <span></span>
+      </div>
+      
+      <!-- 顶部装饰线 -->
+      
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -10,7 +10,7 @@ class ActorListView(ListView):
     model = Actor
     template_name = 'actors/actor_list.html'
     context_object_name = 'actors'
-    paginate_by = 10
+    
 
     def get_queryset(self):
         queryset = super().get_queryset()

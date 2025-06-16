@@ -7,7 +7,7 @@
 
 <div class="bg-white rounded-lg shadow-md p-6">
     <p class="text-lg mb-4">确定要删除出品公司 "{{ object.name }}" 吗？</p> <!-- 修改此处 -->
-    <p class="text-red-500 mb-6">此操作不可撤销，该公司关联的电影信息将被保留。</p>
+    <p class="text-red-500 mb-6">此操作不可撤销，该公司关联的电影信息将被删除。</p>
     
     <form method="post">
         {% csrf_token %}

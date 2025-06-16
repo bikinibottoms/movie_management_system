@@ -9,7 +9,7 @@ class CompanyListView(ListView):
     model = ProductionCompany
     template_name = 'production_companies/company_list.html'
     context_object_name = 'companies'
-    paginate_by = 10
+    
 
 class CompanyCreateView(CreateView):
     model = ProductionCompany
