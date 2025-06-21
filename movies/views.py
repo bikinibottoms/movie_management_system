@@ -70,8 +70,6 @@ def search_movie_info(request):
             directors = [md.director for md in MovieDirector.objects.filter(movie=movie)]
             actors = [mar.actor for mar in MovieActorRelation.objects.filter(movie=movie)]
             narrators = [mn.actor for mn in MovieNarrator.objects.filter(movie=movie)]
-            
-            # 修改这里：通过中间表获取关联的类型
             genre_relations = MovieGenreRelation.objects.filter(movie=movie)
             genres = [relation.genre for relation in genre_relations]
             

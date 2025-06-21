@@ -7,7 +7,7 @@ from genres.models import MovieGenre
 
 class Movie(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=255, null=False)
+    name = models.CharField(max_length=255, null=False, db_index=True)  # 仅保留名称索引
     length = models.IntegerField(null=False)
     plot_summary = models.TextField(blank=True, null=True)
     production_company = models.ForeignKey(
@@ -72,4 +72,4 @@ class MovieRole(models.Model):
     actor = models.ForeignKey(Actor, on_delete=models.CASCADE)
     
     class Meta:
-         unique_together = ('movie', 'actor', 'role_name') 
+         unique_together = ('movie', 'actor', 'role_name')
